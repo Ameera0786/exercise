@@ -1,5 +1,6 @@
 package inClass;
 
+//in Class. not done
 public class Circle extends Shape{
     private double radius;
 
