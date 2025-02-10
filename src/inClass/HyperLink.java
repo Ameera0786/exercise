@@ -19,15 +19,14 @@ public class HyperLink extends Application {
     @Override
     public void start(Stage stage) {
         Hyperlink hyperlink = new Hyperlink("Click me!");
-        hyperlink.setOnAction(event -> {
-            System.out.println("Hyperlink clicked");
-        });
+//        hyperlink.setText("https://msoe.instructure.com/");
 
         hyperlink.setOnAction(event -> {
             try {
                 HostServices hostServices = getHostServices();
                 hostServices.showDocument("https://www.google.com");
-                //hostServices.showDocument(hyperlink.getText());
+
+//                hostServices.showDocument(hyperlink.getText());
             } catch (Exception e) {
                 System.err.println(e);
             }
@@ -39,7 +38,7 @@ public class HyperLink extends Application {
                 "-fx-underline: true");
 
         //Disable hyperlink
-        // hyperlink.setDisable(true);
+         hyperlink.setDisable(true);
 
         VBox root = new VBox(hyperlink);
         root.setAlignment(Pos.CENTER);
