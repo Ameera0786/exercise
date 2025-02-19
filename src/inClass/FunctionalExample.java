@@ -15,6 +15,5 @@ public class FunctionalExample {
     }
     public interface DoMath{
         double theMath(double a, double b);
-
     }
 }
