@@ -1,12 +1,35 @@
 package inClass;
 
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
+import java.util.*;
 
 public class TheArrayList<E> implements List<E> {
     //backing data structure is an array
+    private class TheIterator implements Iterator<E> {
+        private int lastReturned;
+
+        @Override
+        public boolean hasNext() {
+            return lastReturned < size();
+        }
+
+        @Override
+        public E next() throws NoSuchElementException {
+            if (!hasNext()){
+                throw new NoSuchElementException();
+            }
+            return data[lastReturned++];
+        }
+
+        @Override
+        public void remove() throws IllegalStateException {
+            if (lastReturned == -1) {
+                throw new IllegalStateException();
+            }
+            TheArrayList.this.remove(lastReturned);
+            lastReturned = -1;
+            --lastReturned;
+        }
+    }
     private E[] data;
     private static final int INITIAL_CAPACITY = 10;
     private int size;

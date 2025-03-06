@@ -6,6 +6,36 @@ import java.util.List;
 import java.util.ListIterator;
 
 public class TheLinkedList<E> implements List<E> {
+    private class TheIterator implements Iterator<E> {
+        private Node<E> next;
+        private E lastReturned;
+
+        private TheIterator() {
+            this.next = head;
+            this.lastReturned = null;
+        }
+        @Override
+        public boolean hasNext() {
+            return next != null;
+        }
+
+        @Override
+        public E next() {
+            lastReturned = next.element;
+            next = next.next;
+            return lastReturned;
+        }
+
+        public void remove() throws IllegalStateException {
+//            Iterator.super.remove();
+            if (lastReturned == null){
+                throw new IllegalStateException();
+            }
+            TheLinkedList.this.remove(lastReturned);
+            lastReturned = null;
+
+        }
+    }
     private Node<E> head;
     private int size;
 
@@ -16,7 +46,7 @@ public class TheLinkedList<E> implements List<E> {
 
     @Override
     public int size() {
-        return size;
+        return this.size;
     }
 
     @Override
@@ -26,6 +56,13 @@ public class TheLinkedList<E> implements List<E> {
 
     @Override
     public boolean contains(Object o) {
+        Node<E> current = head;
+        while (current.next != null) {
+            if (current.element.equals(o)) {
+                return true;
+            }
+            current = current.next;
+        }
         return false;
     }
 
@@ -62,7 +99,28 @@ public class TheLinkedList<E> implements List<E> {
 
     @Override
     public boolean remove(Object o) {
-        return false;
+        boolean removed = false;
+        if (head == null || size == 0) {
+            return false;
+        }
+
+        if (head.element.equals(o)) {
+            head = head.next;
+            removed = true;
+        } else {
+            Node<E> current = head;
+            while (current.next != null && !removed) {
+                if (current.next.element.equals(o)) {
+                    current.next = current.next.next;
+                    removed = true;
+                }
+                current = current.next;
+            }
+            if (removed) {
+                size++;
+            }
+        }
+        return true;
     }
 
     @Override
@@ -92,32 +150,48 @@ public class TheLinkedList<E> implements List<E> {
 
     @Override
     public void clear() {
-
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        return false;
-    }
-
-    @Override
-    public int hashCode() {
-        return 0;
+        head = null;
+        size = 0;
     }
 
     @Override
     public E get(int index) {
-        return null;
+        Node<E> current = geteNode(index);
+        return current.element;
+    }
+
+    private Node<E> geteNode(int index) throws IndexOutOfBoundsException {
+        checkIndex(index);
+        Node<E> current = head;
+        for (int i = 0; i < index; i++) {
+            current = current.next;
+        }
+        return current;
+    }
+
+    private void checkIndex(int index) throws IndexOutOfBoundsException {
+        if (index >= size || index < 0) {
+            throw new IndexOutOfBoundsException("invalid index " + index);
+        }
     }
 
     @Override
     public E set(int index, E element) {
-        return null;
+        Node<E> current = geteNode(index);
+        E old = current.element;
+        current.element = element;
+        return old;
     }
 
     @Override
     public void add(int index, E element) {
-
+        checkIndex(index);
+        if (index == 0) {
+            head = new Node<>(element, head);
+        } else {
+            Node<E> prev = geteNode(index - 1);
+            prev.next = new Node<>(element, prev.next);
+        }
     }
 
     @Override
@@ -161,9 +235,9 @@ public class TheLinkedList<E> implements List<E> {
             this.next = next;
         }
 
+        @Override
         public String toString() {
             return element.toString();
         }
     }
-
 }
