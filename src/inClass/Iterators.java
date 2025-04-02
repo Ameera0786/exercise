@@ -1,6 +1,11 @@
 package inClass;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
 
 //Iterate through list
 //Linked list - start at head and go through each time
@@ -14,10 +19,7 @@ public class Iterators {
         list.addAll(Arrays.asList(words));
         list2.addAll(Arrays.asList(words));
         collection.addAll(Arrays.asList(words));
-        //Arraylist
-//        for (String word : words) {
-//            System.out.println(word);
-//        }
+
         for (int i = 0; i < list.size(); i++) {
             System.out.println(list.get(i));
         }

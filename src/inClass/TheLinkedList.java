@@ -82,8 +82,7 @@ public class TheLinkedList<E> implements List<E> {
     }
 
     @Override
-    public boolean add(E e) {
-        // O(n)
+    public boolean add(E e) { // O(n)
         if (head == null) {
             head = new Node<>(e);
         } else {
@@ -96,14 +95,12 @@ public class TheLinkedList<E> implements List<E> {
         size++;
         return true;
     }
-
     @Override
     public boolean remove(Object o) {
         boolean removed = false;
         if (head == null || size == 0) {
             return false;
         }
-
         if (head.element.equals(o)) {
             head = head.next;
             removed = true;
@@ -153,7 +150,6 @@ public class TheLinkedList<E> implements List<E> {
         head = null;
         size = 0;
     }
-
     @Override
     public E get(int index) {
         Node<E> current = geteNode(index);
@@ -168,13 +164,11 @@ public class TheLinkedList<E> implements List<E> {
         }
         return current;
     }
-
     private void checkIndex(int index) throws IndexOutOfBoundsException {
         if (index >= size || index < 0) {
             throw new IndexOutOfBoundsException("invalid index " + index);
         }
     }
-
     @Override
     public E set(int index, E element) {
         Node<E> current = geteNode(index);
@@ -182,7 +176,6 @@ public class TheLinkedList<E> implements List<E> {
         current.element = element;
         return old;
     }
-
     @Override
     public void add(int index, E element) {
         checkIndex(index);

@@ -18,7 +18,6 @@ public class TheStack<E> implements PureStack<E> {
     public boolean empty() {
         return data.isEmpty();
     }
-
     @Override
     public E peek() throws EmptyStackException {
         if (empty()) {
@@ -26,7 +25,6 @@ public class TheStack<E> implements PureStack<E> {
         }
         return data.getFirst();
     }
-
     @Override
     public E pop() throws EmptyStackException {
         if (empty()) {
@@ -34,7 +32,6 @@ public class TheStack<E> implements PureStack<E> {
         }
         return data.removeFirst();
     }
-
     @Override
     public E push(E item) {
         data.addFirst(item);

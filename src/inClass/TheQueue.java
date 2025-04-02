@@ -9,7 +9,6 @@ import java.util.*;
 public class TheQueue<E> implements Queue<E> {
     private static final int MAX = 10;
     private final List<E> data = new TheLinkedList<>();
-
     @Override
     public boolean add(E e) throws IllegalStateException, NullPointerException {
         if (data.size() == MAX) {
@@ -53,9 +52,9 @@ public class TheQueue<E> implements Queue<E> {
         }
         return returnItem;
     }
-
     @Override
-    public boolean offer(E e) throws IllegalStateException, NullPointerException {
+    public boolean offer(E e) throws IllegalStateException,
+            NullPointerException {
         boolean addable = data.size() != MAX;
         if (addable) {
             data.addLast(Objects.requireNonNull(e));
